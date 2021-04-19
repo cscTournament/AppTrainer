@@ -1,3 +1,3 @@
 # AppTrainer
-This java-web-app helps to startup that produced medical apps
+This java web application helps a startup producing medical applications. 
 https://youtu.be/-uVfMFCPsvM
