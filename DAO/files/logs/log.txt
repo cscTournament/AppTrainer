@@ -1,0 +1,5 @@
+{13-07-2017 13:44:32} {main} {FATAL} {tgourianova.apptrainer.util.ConnectionPool} {line 79} {Unexpected internal error} 
+{13-07-2017 13:45:11} {main} {FATAL} {tgourianova.apptrainer.util.ConnectionPool} {line 79} {Unexpected internal error} 
+{13-07-2017 14:11:30} {main} {FATAL} {tgourianova.apptrainer.util.ConnectionPool} {line 86} {Не возможно подключиться к БД} 
+{13-07-2017 14:13:16} {main} {FATAL} {tgourianova.apptrainer.util.ConnectionPool} {line 86} {Не возможно подключиться к БД} 
+{18-04-2021 20:39:54} {main} {FATAL} {gourianova.apptrainer.db.ConnectionPool} {line 55} {Could not create connection to database server. Attempted reconnect 3 times. Giving up.} 

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration status = "WARN" name = "TriangleLog">
+    <properties>
+        <property name="string_log">{%d{dd-MM-yyyy HH:mm:ss}} {%t} {%5p} {%c{4}} {line %L} {%m} %n</property>
+    </properties>
+    <appenders>
+        <Console name = "Console" target = "SYSTEM_OUT">
+            <PatternLayout pattern="${string_log}" charset="UTF-8"/>
+        </Console>
+        <RollingFile name = "RollingFile" filename = "files/logs/log.txt" filePattern="files/logs/$${date:yyyy-MM}/triangle-%d{MM-dd-yyyy}-%i.log.zip">
+            <PatternLayout pattern="${string_log}" charset="UTF-8"/>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="100 KB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="10"/>
+        </RollingFile>
+    </appenders>
+    <loggers>
+        <root level="warn">
+            <appender-ref ref="Console"/>
+            <appender-ref ref="RollingFile"/>
+        </root>
+    </loggers>
+</configuration>
