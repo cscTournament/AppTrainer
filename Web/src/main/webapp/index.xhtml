@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui" xmlns:comment="http://java.sun.com/jsf/core">
+
+<h:head>
+    <title >Binocularvision Apps</title>
+ <!--  <h:graphicImage value="/userPhotoServlet?userId=#{profileBean.userId}" width="110" height="150" />-->
+</h:head>
+<h:body>
+
+    <p:layout fullPage="true">
+        <p:layoutUnit style="background-color: lightseagreen; position: relative; height: 100px;" position="north" size="100"
+                      resizable="false" closable="false" collapsible="true">
+            <div class="header-app" style="margin: 50px; padding: 20px;">
+                <p:outputLabel
+                        style="color: #FFFFFF; font-size: 2em; position: absolute;top: 50%; -webkit-transform : translateY(-50%); transform : translateY(-50%);  background: url(WEB-INF/bv.jpg)"
+                        value="BinocularVision Apps"
+
+                />
+            </div>
+        </p:layoutUnit>
+
+        <p:layoutUnit position="center">
+            <h:form id="updateForm">
+                <div class="app-lists" style="margin: 50px; padding: 20px;">
+                    <p:outputLabel value="Apps List" style="font-size: 18px;background: url(WEB-INF/bv.jpg)" />
+
+                    <p/>
+
+                    <p:dataTable id="itemTables" var="item" value="#{appcontroller.appItems}"
+                                 disabledSelection="#{AppItem.complete == true}"
+                                 selection="#{appcontroller.selectedItems}" rowKey="#{item.id}" paginator="true"
+                                 paginatorPosition="bottom" rows="20">
+
+
+
+                        <p:column headerText="Type">
+                            <h:outputText value="#{item.name}"/>
+                        </p:column>
+
+                        <p:column headerText="HttpAddress">
+                            <h:outputText value="#{item.category}"/>
+                        </p:column>
+
+                        <p:column headerText="Order completed" selectionMode="multiple" style="text-align:center"/>
+
+                    </p:dataTable>
+
+                    <div class="updatataks" style="margin: 15px">
+                        <p:commandButton value="Update App" id="updateapp" update="itemTables"
+                                         action="#{appcontroller.buttonUpdateAction()}" style="margin-right:20px;"
+                                         styleClass="ui-priority-primary"/>
+                    </div>
+                </div>
+
+
+                <hr style="margin: 50px;"/>
+
+
+                <div class="app-add" style="margin: 50px; padding: 20px;">
+                    <h:panelGrid columns="2" cellpadding="5">
+                        <p:outputLabel style="font-size: 1.4em;" value="App's Type :"/>
+                        <p:inputText style="font-size: 1.4em;" id="name" value="#{appcontroller.name}"/>
+
+
+                        <p:outputLabel style="font-size: 1.4em;" value="App's HttpAddress: "/>
+                        <p:inputText style="font-size: 1.4em;" id="category" value="#{appcontroller.category}"/>
+                    </h:panelGrid>
+                    <p/>
+                    <p:commandButton update="itemTables" value="Add App" id="addapp"
+                                     action="#{appcontroller.buttonAddAction()}"
+                                     style="margin-right:20px;" styleClass="ui-priority-primary"/>
+                </div>
+                <div class="registration"  style="margin: 50px; padding: 20px;">
+                <h:panelGrid columns="2" cellpadding="5">
+                    <p:outputLabel style="font-size: 16pt;" value="Where could I get my apps?"/>
+                    <a  href="/controller?action=show_admin_page" > More information and registration...</a> </h:panelGrid>
+                        <h:outputLink color="lightgreensea" value="gotoadminpage"/>
+
+                </div>
+            </h:form>
+        </p:layoutUnit>
+    </p:layout>
+</h:body>
+</html>
