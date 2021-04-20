@@ -30,7 +30,7 @@
         <dependency>
             <groupId>by.gourianova.apptrainer</groupId>
             <artifactId>Entity</artifactId>
-            <version>1.0 </version>
+            <version>1.0</version>
         </dependency>
 
     </dependencies>
