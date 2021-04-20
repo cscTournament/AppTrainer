@@ -16,9 +16,9 @@ import org.junit.runners.Parameterized.Parameters;
 
 //import static org.junit.Assert.assertEquals;
 
-@RunWith(value= Parameterized.class)
+//@RunWith(value= Parameterized.class)
 public class AppDaoTest {
-    private int app_Id;
+  /*  private int app_Id;
     private String expectedTitle;
 
  @Parameters
@@ -56,4 +56,6 @@ public class AppDaoTest {
         }
 
     }
+
+   */
 }

@@ -10,21 +10,16 @@ import java.util.*;
 
 //import static jdk.nashorn.internal.runtime.regexp.joni.Config.log;
 public class AppDao extends AbstractDao<App> {
-  /* private final static String SQL_FIND_ALL_APPS = "SELECT apps.Id , types.Type, types.Price_Per_Hour, WWeb_shop, httpAddress.Location, types.Image, apps.HttpAddresses_Id FROM apps, types,httpaddresses WHERE apps.HttpAddresses_Id = httpaddresses.Id AND apps.Types_Id = types.Id AND apps.In_Rent = '0' ORDER BY apps.Id;";
-    private final static String SQL_FIND_BY_PAGE = "SELECT apps.Id , types.Type, types.Price_Per_Hour, Web_shop, httpAddress.Location, types.Image, apps.HttpAddresses_Id FROM apps, types, httpaddresses WHERE apps.HttpAddresses_Id = httpaddresses.Id AND apps.Types_Id = types.Id AND apps.In_Rent = '0' ORDER BY apps.Id LIMIT ? OFFSET ?;";
-    private final static String SQL_FIND_BY_ID = "SELECT apps.Id , types.Type, types.Price_Per_Hour, Web_shop, httpAddress.Location, types.Image, apps.HttpAddresses_Id FROM apps, types,httpaddresses WHERE apps.Id = ? AND  apps.HttpAddresses_Id = httpaddresses.Id AND apps.Types_Id = types.Id ORDER BY apps.Id;";
-    private final static String SQL_FIND_APP = "SELECT apps.Id , types.Type, types.Price_Per_Hour, Web_shop, httpAddress.Location, types.Image, apps.HttpAddresses_Id  FROM apps, types, httpaddresses WHERE apps.Id = ? AND apps.HttpAddresses_Id = httpaddresses.Id AND apps.Types_Id = types.Id;";
 
-*/
 
     private final static String SQL_FIND_ALL_APPS = "SELECT apps.Id ,  apps.Title, types.Price_Per_Hour,   httpaddresses.Web_shop, httpaddresses.Location, types.Image  FROM apps, types, httpaddresses WHERE apps.HttpAddresses_Id = httpaddresses.Id AND apps.Types_Id = types.Id ;";
-    //private final static String SQL_FIND_ALL_APPS = "SELECT apps.Id , apps.Title, types.Price_Per_Hour,  types.Image, apps.HttpAddresses_Id FROM apps, types, httpaddresses WHERE apps.HttpAddresses_Id = httpaddresses.Id AND apps.Types_Id = types.Id AND apps.In_Rent = '0' ORDER BY apps.Id;";
-    private final static String SQL_FIND_BY_PAGE = "SELECT apps.Id , types.Type, types.Price_Per_Hour,  types.Image, apps.HttpAddresses_Id FROM apps, types, httpaddresses WHERE apps.HttpAddresses_Id = httpaddresses.Id AND apps.Types_Id = types.Id AND apps.In_Rent = '0' ORDER BY apps.Id LIMIT ? OFFSET ?;";
-    private final static String SQL_FIND_BY_ID = "SELECT apps.Id , types.Type, types.Price_Per_Hour,  types.Image, apps.HttpAddresses_Id FROM apps, types, httpaddresses WHERE apps.Id = ? AND  apps.HttpAddresses_Id = httpaddresses.Id AND apps.Types_Id = types.Id ORDER BY apps.Id;";
-    private final static String SQL_FIND_APP = "SELECT apps.Id , types.Type, types.Price_Per_Hour,  types.Image, apps.HttpAddresses_Id  FROM apps, types, httpaddresses WHERE apps.Id = ? AND apps.HttpAddresses_Id = httpaddresses.Id AND apps.Types_Id = types.Id;";
+
+    private final static String SQL_FIND_BY_PAGE = "SELECT apps.Id ,  apps.Title, types.Price_Per_Hour,  types.Image, apps.HttpAddresses_Id FROM apps, types, httpaddresses WHERE apps.HttpAddresses_Id = httpaddresses.Id AND apps.Types_Id = types.Id AND apps.In_Rent = '0' ORDER BY apps.Id LIMIT ? OFFSET ?;";
+    private final static String SQL_FIND_BY_ID = "SELECT apps.Id ,  apps.Title, types.Price_Per_Hour,  types.Image, apps.HttpAddresses_Id FROM apps, types, httpaddresses WHERE apps.Id = ? AND  apps.HttpAddresses_Id = httpaddresses.Id AND apps.Types_Id = types.Id ORDER BY apps.Id;";
+    private final static String SQL_FIND_APP = "SELECT apps.Id ,  apps.Title, types.Price_Per_Hour,  types.Image, apps.HttpAddresses_Id  FROM apps, types, httpaddresses WHERE apps.Id = ? AND apps.HttpAddresses_Id = httpaddresses.Id AND apps.Types_Id = types.Id;";
     private final static String SQL_RENT_TRUE = "UPDATE apps SET In_Rent = '1' WHERE id = ?;";
     private final static String SQL_ADD_ORDER = "INSERT INTO orders (Start_Date, Users_Id, Apps_Id) VALUES (now(), ?, ?);";
-    private final static String SQL_SET_USER_ROLE_HAS_ORDER = "UPDATE users SET Roles_Id=3 WHERE Id=?;";
+    private final static String SQL_SET_USER_ROLE_HAS_ORDER = "UPDATE users SET Roles_Id=17 WHERE Id=?;";
     private final static String SQL_CREATE_APP = "INSERT INTO apps (Types_Id, HttpAddresses_Id, Title) VALUES (?, ?, ?);";
     /*SELECT apps.Id, Type, Price_Per_Hour, Web_shop, Location, Image FROM apps JOIN types ON apps.Types_Id = types.Id JOIN httpaddresses ON apps.HttpAddresses_Id = stations.Id WHERE apps.In_Rent=0 ORDER BY apps.Id;*/
     public final static String GOOGLE_PLAY_RELEASE = "/store/apps/details?id=";
@@ -185,17 +180,18 @@ public class AppDao extends AbstractDao<App> {
 
     private String createUrL(String web_shop, String location) {
         String url = "";
-        if (web_shop.contains("play.google.com")) {
-            url = "http://" + "play.google.com" + GOOGLE_PLAY_RELEASE + location;
-            System.out.println("play.google.com");
+        if (web_shop!=null) {
+            if (web_shop.contains("play.google.com")) {
+                url = "http://" + "play.google.com" + GOOGLE_PLAY_RELEASE + location;
+                System.out.println("play.google.com");
+            } else if (web_shop.contains("chrome.google.com")) {
+                url = "http://" + "chrome.google.com" + GOOGLE_CHROM_RELEASE + location;
+                System.out.println("chrome.google.com");
+            } else if (web_shop.contains("csc")) {
+                url = "http://" + "csc." + location;
+                System.out.println("csc");
+            }
         }
-        else if (web_shop.contains("chrome.google.com")){
-            url = "http://" + "chrome.google.com" + GOOGLE_CHROM_RELEASE + location;
-            System.out.println("chrome.google.com");}
-        else if (web_shop.contains("csc")){
-            url = "http://" + "csc." + location;
-            System.out.println("csc");}
-
 
         return url;
     }
