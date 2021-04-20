@@ -8,14 +8,21 @@
     <artifactId>AppTrainer</artifactId>
    <packaging>pom</packaging>
     <!--    <packaging>war</packaging>-->
-   <version>1.0-SNAPSHOT</version>
+   <version>1.0</version>
    <modules>
        <module>Entity</module>
        <module>DAO</module>
        <module>Service</module>
        <module>Web</module>
    </modules>
+<!-- <servers>
+    <server>
+        <id> tomcat-server</id>
+        <username> mytomcat</username>
+        <password>secret</password>
+    </server>
 
+</servers>-->
    <dependencies>
        <!-- https://mvnrepository.com/artifact/junit/junit -->
         <dependency>
