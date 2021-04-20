@@ -43,12 +43,13 @@ public class ShowAdminPageAction implements Action {
         ArrayList<HttpAddress> httpAddressesList;
         try {
             usersList = userService.findAll();
+
+            appsList = appService.findAll();
             //TODO: write and test
-          //  appsList = appService.findAll();
-          //  ordersList = orderService.findAll();
+            //ordersList = orderService.findAll();
             httpAddressesList = httpAddressService.findAll();
             request.setAttribute(USERS_LIST, usersList);
-        //  request.setAttribute(APPS_LIST, appsList);
+          request.setAttribute(APPS_LIST, appsList);
         // request.setAttribute(ORDERS_LIST, ordersList);
            request.setAttribute(HTTPADDRESSES_LIST, httpAddressesList);
             RequestDispatcher requestDispatcher = request.getRequestDispatcher(ADMIN_PAGE);

@@ -42,6 +42,7 @@ public enum ActionType {
     SHOW_USER_ORDERS(new ShowUserOrdersAction()),
     SHOW_ALL_USER_APPS (new ShowAllUserAppsAction()),
     SHOW_ALL_APPS (new ShowAllAppsAction()),
+
     SHOW_ALL_USERS (new ShowAllUserAction()),
     SHOW_ALL_TYPES (new ShowAllTypesAction()),
     SHOW_ALL_ROLES (new ShowAllRoleAction()),
@@ -50,14 +51,17 @@ public enum ActionType {
     SHOW_UNCLOSED_ORDERS (new ShowUnclosedOrdersAction()),
     SHOW_ADMIN_PAGE(new ShowAdminPageAction()),
     SHOW_APPS_PAGE (new ShowAllAppsByPageAction()),
+    SHOW_DELETE_USER_PAGE(new ShowDeleteUserPageAction()),
 
     FIND_USER(new FindUserAction()),
 
+    DELETE_USER(new DeleteUserAction()),
     DELETE_ROLE(new DeleteRoleAction()),
 
     GET_USER_DATA (new GetUserDataAction()),
     GET_APP_DATA (new GetAppDataAction()),
     GET_TYPE_DATA (new GetTypeDataAction());
+
 
     Action action;
 

@@ -7,6 +7,7 @@ public class PageConstant {
     public final static String REGISTER_PAGE = "jsp/user_register.jsp";
     public final static String LOGIN_PAGE = "jsp/user_login.jsp";
     public final static String ADMIN_PAGE = "jsp/admin_page.jsp";
+    public final static String DELETE_USER_PAGE = "includeAdmin/user_delete.jsp";
     public final static String RENT_APP = "jsp/rent_app.jsp";
     public final static String RETURN_APP = "jsp/return_app.jsp";
     public final static String ADD_MONEY = "jsp/user_add_money.jsp";
