@@ -17,7 +17,7 @@
                     <li><a href="/controller?action=get_user_data"><fmt:message key="nav.user.change"/></a></li>
                     <li class="divider"></li>
 
-                    <li><a href="../jsp/admin_page.jsp"><fmt:message key="search.form.user"/></a>
+                    <li><a href="#"><fmt:message key="search.form.user"/></a>
 
                         <form action="/controller" method="post" class="form-horizontal">
                             <input type="hidden" name="action" value="find_user">
@@ -75,7 +75,7 @@
 
             <%--role--%>
             <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="../jsp/admin_page.jsp"><fmt:message
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#"><fmt:message
                         key="nav.role"/>
                     <span class="caret"></span></a>
                 <ul class="dropdown-menu">
@@ -87,7 +87,7 @@
 
             <%--order--%>
             <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="../jsp/admin_page.jsp"><fmt:message
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#"><fmt:message
                         key="nav.order"/>
                     <span class="caret"></span></a>
                 <ul class="dropdown-menu">
@@ -126,7 +126,7 @@
 
             <%--type--%>
             <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="../jsp/admin_page.jsp"><fmt:message
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#"><fmt:message
                         key="nav.type"/>
                     <span class="caret"></span></a>
                 <ul class="dropdown-menu">
@@ -166,7 +166,7 @@
         </ul>
 
         <%--exit/admin's page--%>
-        <c:if test="${not empty user and user.roleId > 6}">
+        <c:if test="${not empty user and user.roleId == 6}">
             <form action="/controller" class="navbar-form navbar-right">
                 <fmt:message key="nav.welcome"/><ctg:info user="${user}"/>
                 <input type="hidden" name="action" value="logout">

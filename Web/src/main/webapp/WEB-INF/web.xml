@@ -4,40 +4,40 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
     <welcome-file-list>
-        <welcome-file>index.xhtml</welcome-file>
-        <welcome-file>index.jsp</welcome-file>
-    </welcome-file-list>
-    <error-page>
-    <error-code>404</error-code>
-    <location>/jsp/error_page.jsp</location>
-    </error-page>
-    <!--
-        <error-page>
-            <error-code>404</error-code>
+    <!--       <welcome-file>index.xhtml</welcome-file>-->
+          <welcome-file>index.jsp</welcome-file>
+      </welcome-file-list>
+      <error-page>
+      <error-code>404</error-code>
+      <location>/jsp/error_page.jsp</location>
+      </error-page>
+      <!--
+          <error-page>
+              <error-code>404</error-code>
 
-        <location>/jsp/admin_page.jsp</location>
-    </error-page>
-    <servlet>
-        <servlet-name>Faces Servlet</servlet-name>
-        <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
-        <load-on-startup>1</load-on-startup>
-    </servlet>
+          <location>/jsp/admin_page.jsp</location>
+      </error-page>
+      <servlet>
+          <servlet-name>Faces Servlet</servlet-name>
+          <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+          <load-on-startup>1</load-on-startup>
+      </servlet>
 
-    <context-param>
-        <param-name>primefaces.THEME</param-name>
-        <param-value>nova-light</param-value>
-    </context-param>
+      <context-param>
+          <param-name>primefaces.THEME</param-name>
+          <param-value>nova-light</param-value>
+      </context-param>
 
-    <servlet-mapping>
-        <servlet-name>Faces Servlet</servlet-name>
-        <url-pattern>*.xhtml</url-pattern>
-    </servlet-mapping>
+      <servlet-mapping>
+          <servlet-name>Faces Servlet</servlet-name>
+          <url-pattern>*.xhtml</url-pattern>
+      </servlet-mapping>
 
-    <context-param>
-        <param-name>javax.faces.PROJECT_STAGE</param-name>
-        <param-value>Development</param-value>
-    </context-param>
--->
+      <context-param>
+          <param-name>javax.faces.PROJECT_STAGE</param-name>
+          <param-value>Development</param-value>
+      </context-param>
+  -->
     <listener>
     <listener-class>by.gourianova.apptrainer.listener.ServletContextListenerImpl
 

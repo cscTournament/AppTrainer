@@ -185,10 +185,11 @@
 
                             </div>
                         </form>
-
                         <br/>
                         <br/>
-                        <a href="/controller?action=show_admin_page" class="btn btn-default"><fmt:message key="continue"/></a>
+                        <br/>
+                        <br/>
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;   <a href="/controller?action=show_admin_page" class="btn btn-default"><fmt:message key="continue"/></a> &nbsp;   <a href="/controller?action=show_delete_user_page" class="btn btn-default"><fmt:message key="delete.user"/></a>
                     </div>
                 </div>
 
@@ -200,8 +201,8 @@
                 <br/>
                 <br/>
 
-            <%--    <%@ include file="../include/footer_user.jsp" %> --%>
-    <%@ include file="../include/footer.jsp" %>
+             <%@ include file="../include/footer_user.jsp" %>
+
 </body>
 </html>
 
