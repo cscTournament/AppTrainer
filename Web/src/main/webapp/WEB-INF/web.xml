@@ -37,7 +37,7 @@
           <param-name>javax.faces.PROJECT_STAGE</param-name>
           <param-value>Development</param-value>
       </context-param>
-  -->
+
     <listener>
     <listener-class>by.gourianova.apptrainer.listener.ServletContextListenerImpl
 
@@ -75,6 +75,6 @@
         <filter-name>RefererFilter </filter-name>
         <url-pattern>  /controller     </url-pattern>
     </filter-mapping>
-
+-->
 
 </web-app>

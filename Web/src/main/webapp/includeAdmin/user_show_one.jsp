@@ -201,7 +201,7 @@
                 <br/>
                 <br/>
 
-             <%@ include file="../include/footer_user.jsp" %>
+             <%@ include file="../include/footer_admin.jsp" %>
 
 </body>
 </html>

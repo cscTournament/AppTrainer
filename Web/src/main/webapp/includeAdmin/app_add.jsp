@@ -55,6 +55,17 @@
             <%-- TODO:FIX  menue should get info from list--%>
             <form action="/controller" method="post" class="form-horizontal">
                 <input type="hidden" name="action" value="add_app">
+               <%-- <div class="form-group">
+                    <label for="type2" class="col-sm-3 control-label"><fmt:message key="add.app.form.type"/></label>
+--%>
+                    <div class="form-group">
+                        <label for="title" class="col-sm-3 control-label"><fmt:message key="add.app.form.title"/></label>
+                        <div class="col-sm-9">
+                            <input type="text"  id="title" name="title" class="form-control" placeholder="<fmt:message key="add.app.form.title.placeholder"/>"
+                                   maxlength="100" required pattern="[a-zA-Z0-9._*]{3,100}">
+                            <b style="color: darkgray; font-size: 10px"><fmt:message key="validation.app"/></b>
+                        </div>
+                    </div>
                 <div class="form-group">
                     <label for="type2" class="col-sm-3 control-label"><fmt:message key="add.app.form.type"/></label>
                     <div class="col-sm-9">
