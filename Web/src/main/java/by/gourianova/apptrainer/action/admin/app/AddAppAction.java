@@ -22,19 +22,31 @@ public class AddAppAction implements Action {
     public Router execute(HttpServletRequest request, HttpServletResponse response) {
         Router router = new Router();
         App app = new App();
-        try {
-            app.setTypeId(Integer.parseInt(request.getParameter(TYPE_ID)));
-            app.setHttpAddressesId(Integer.parseInt(request.getParameter(HTTPADDRESS_ID)));
-            app.setTitle(request.getParameter(TITLE));
-            appService.createApp(app);
-            router.setPagePath(PageConstant.ADMIN_PAGE);
-          //  router.setPagePath(PageConstant.FIRST_PAGE);
-            router.setRoute(Router.RouteType.REDIRECT);
-        } catch (ServiceException e) {
+        System.out.println(Integer.parseInt(request.getParameter(TYPE_ID)));
+        app.setTypeId(Integer.parseInt(request.getParameter(TYPE_ID)));
+        System.out.println(Integer.parseInt(request.getParameter(HTTPADDRESS_ID)));
+        app.setHttpAddressesId(Integer.parseInt(request.getParameter(HTTPADDRESS_ID)));
+        app.setTitle(request.getParameter(TITLE));
+        System.out.println(request.getParameter(TITLE));
+System.out.println(app.toString());
+
+try {
+                if (appService.createApp(app)){
+                    request.setAttribute(MESSAGE, "The app is added");
+
+               System.out.println("The app is added");
+                    router.setPagePath(PageConstant.ADMIN_PAGE);
+
+                    router.setRoute(Router.RouteType.REDIRECT);
+                    //router.setPagePath(PageConstant.FIRST_PAGE);
+            }
+
+            } catch (ServiceException e) {
             request.getSession().setAttribute(MESSAGE, e.getMessage());
             router.setPagePath(PageConstant.ERROR_PAGE);
             router.setRoute(Router.RouteType.REDIRECT);
         }
+
         return router;
     }
 }
