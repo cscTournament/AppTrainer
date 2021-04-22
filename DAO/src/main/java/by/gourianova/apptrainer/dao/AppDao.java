@@ -20,7 +20,7 @@ public class AppDao extends AbstractDao<App> {
     private final static String SQL_RENT_TRUE = "UPDATE apps SET In_Rent = '1' WHERE id = ?;";
     private final static String SQL_ADD_ORDER = "INSERT INTO orders (Start_Date, Users_Id, Apps_Id) VALUES (now(), ?, ?);";
     private final static String SQL_SET_USER_ROLE_HAS_ORDER = "UPDATE users SET Roles_Id=17 WHERE Id=?;";
-    private final static String SQL_CREATE_APP = "INSERT INTO apps (Types_Id, HttpAddresses_Id, Title) VALUES (?, ?, ?);";
+    private final static String SQL_CREATE_APP = "INSERT INTO apps (Title, Types_Id, HttpAddresses_Id) VALUES (?, ?, ?);";
     /*SELECT apps.Id, Type, Price_Per_Hour, Web_shop, Location, Image FROM apps JOIN types ON apps.Types_Id = types.Id JOIN httpaddresses ON apps.HttpAddresses_Id = stations.Id WHERE apps.In_Rent=0 ORDER BY apps.Id;*/
     public final static String GOOGLE_PLAY_RELEASE = "/store/apps/details?id=";
     public final static String GOOGLE_CHROM_RELEASE ="/webstore/detail/binocularvision";
@@ -73,14 +73,16 @@ public class AppDao extends AbstractDao<App> {
     public boolean createEntity(App entity) throws DaoException {
         ProxyConnection connection = null;
         PreparedStatement preparedStatement = null;
-        boolean isCreate;
+        boolean isCreate=false;
+        System.out.println("try DAOApp.createEntity  ");
         try {
             connection = ConnectionPool.getInstance().getConnection();
             preparedStatement = connection.prepareStatement(SQL_CREATE_APP);
-            preparedStatement.setInt(1, entity.getTypeId());
-            preparedStatement.setInt(2, entity.getHttpAddressesId());
-            preparedStatement.setString(3, entity.getTitle());
+            preparedStatement.setString(1, entity.getTitle());
+            preparedStatement.setInt(2, entity.getTypeId());
+            preparedStatement.setInt(3, entity.getHttpAddressesId());
             preparedStatement.executeUpdate();
+            System.out.println("DAOApp.createEntity OK ");
             isCreate = true;
         } catch (SQLException e) {
             throw new DaoException("Error in createEntity", e);
@@ -183,14 +185,15 @@ public class AppDao extends AbstractDao<App> {
         if (web_shop!=null) {
             if (web_shop.contains("play.google.com")) {
                 url = "http://" + "play.google.com" + GOOGLE_PLAY_RELEASE + location;
-                System.out.println("play.google.com");
+
             } else if (web_shop.contains("chrome.google.com")) {
                 url = "http://" + "chrome.google.com" + GOOGLE_CHROM_RELEASE + location;
-                System.out.println("chrome.google.com");
+
             } else if (web_shop.contains("csc")) {
                 url = "http://" + "csc." + location;
-                System.out.println("csc");
+
             }
+            else {url="http://csc.buxar-host.ru/csc_tournament_2020/";}
         }
 
         return url;
