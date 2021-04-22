@@ -79,7 +79,7 @@ public class App extends Entity {
         return HttpAddressesId;
     }
 
-    public void setHttpAddressesId(int stationId) {
+    public void setHttpAddressesId(int HttpAddressesId) {
         this.HttpAddressesId = HttpAddressesId;
     }
 
