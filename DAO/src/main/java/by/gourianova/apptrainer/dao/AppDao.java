@@ -2,11 +2,15 @@ package by.gourianova.apptrainer.dao;
 
 import by.gourianova.apptrainer.db.ConnectionPool;
 import by.gourianova.apptrainer.db.ProxyConnection;
-import by.gourianova.apptrainer.exception.DaoException;
 import by.gourianova.apptrainer.entity.App;
+import by.gourianova.apptrainer.exception.DaoException;
 
-import java.sql.*;
-import java.util.*;
+import java.sql.Blob;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Base64;
 
 //import static jdk.nashorn.internal.runtime.regexp.joni.Config.log;
 public class AppDao extends AbstractDao<App> {
@@ -23,7 +27,7 @@ public class AppDao extends AbstractDao<App> {
     private final static String SQL_CREATE_APP = "INSERT INTO apps (Title, Types_Id, HttpAddresses_Id) VALUES (?, ?, ?);";
     /*SELECT apps.Id, Type, Price_Per_Hour, Web_shop, Location, Image FROM apps JOIN types ON apps.Types_Id = types.Id JOIN httpaddresses ON apps.HttpAddresses_Id = stations.Id WHERE apps.In_Rent=0 ORDER BY apps.Id;*/
     public final static String GOOGLE_PLAY_RELEASE = "/store/apps/details?id=";
-    public final static String GOOGLE_CHROM_RELEASE ="/webstore/detail/binocularvision";
+    public final static String GOOGLE_CHROM_RELEASE = "/webstore/detail/binocularvision";
 
     @Override
     public ArrayList<App> findAll() throws DaoException {
@@ -73,8 +77,8 @@ public class AppDao extends AbstractDao<App> {
     public boolean createEntity(App entity) throws DaoException {
         ProxyConnection connection = null;
         PreparedStatement preparedStatement = null;
-        boolean isCreate=false;
-        System.out.println("try DAOApp.createEntity  ");
+        boolean isCreate = false;
+
         try {
             connection = ConnectionPool.getInstance().getConnection();
             preparedStatement = connection.prepareStatement(SQL_CREATE_APP);
@@ -126,28 +130,33 @@ public class AppDao extends AbstractDao<App> {
         App app = null;
         ProxyConnection connection = null;
         PreparedStatement preparedStatement = null;
+       
         try {
             connection = ConnectionPool.getInstance().getConnection();
-            connection.setAutoCommit(false);
-            preparedStatement = connection.prepareStatement(SQL_FIND_BY_ID);
+            System.out.println("con +");
+            preparedStatement = connection.prepareStatement(SQL_ADD_ORDER);
+        /*    preparedStatement = connection.prepareStatement(SQL_FIND_BY_ID);
             preparedStatement.setInt(1, appId);
             ResultSet resultSet = preparedStatement.executeQuery();
+           // connection.setAutoCommit(false);
             if (resultSet.next()) {
                 app = buildApp(resultSet);
-                app.setInRent(true);
-                preparedStatement = connection.prepareStatement(SQL_RENT_TRUE);
-                preparedStatement.setInt(1, app.getId());
-                preparedStatement.executeUpdate();
-                preparedStatement = connection.prepareStatement(SQL_ADD_ORDER);
-                preparedStatement.setInt(1, userId);
-                preparedStatement.setInt(2, app.getId());
-                preparedStatement.executeUpdate();
-                preparedStatement = connection.prepareStatement(SQL_SET_USER_ROLE_HAS_ORDER);
-                preparedStatement.setInt(1, userId);
-                preparedStatement.executeUpdate();
-                connection.commit();
-                connection.setAutoCommit(true);
-            }
+                */
+            //app.setInRent(true);
+            //preparedStatement = connection.prepareStatement(SQL_RENT_TRUE);
+            //preparedStatement.setInt(1, app.getId());
+            //preparedStatement.executeUpdate();
+            preparedStatement.setInt(1, userId);
+            preparedStatement.setInt(2, appId);
+            preparedStatement.executeUpdate();
+            System.out.println("order added +");
+            preparedStatement = connection.prepareStatement(SQL_SET_USER_ROLE_HAS_ORDER);
+            preparedStatement.setInt(1, userId);
+            preparedStatement.executeUpdate();
+            System.out.println("role changed to 17 +");
+            //   connection.commit();
+            //  connection.setAutoCommit(true);
+
         } catch (SQLException e) {
             try {
                 connection.rollback();
@@ -182,7 +191,7 @@ public class AppDao extends AbstractDao<App> {
 
     private String createUrL(String web_shop, String location) {
         String url = "";
-        if (web_shop!=null) {
+        if (web_shop != null) {
             if (web_shop.contains("play.google.com")) {
                 url = "http://" + "play.google.com" + GOOGLE_PLAY_RELEASE + location;
 
@@ -192,8 +201,9 @@ public class AppDao extends AbstractDao<App> {
             } else if (web_shop.contains("csc")) {
                 url = "http://" + "csc." + location;
 
+            } else {
+                url = "http://csc.buxar-host.ru/csc_tournament_2020/";
             }
-            else {url="http://csc.buxar-host.ru/csc_tournament_2020/";}
         }
 
         return url;
