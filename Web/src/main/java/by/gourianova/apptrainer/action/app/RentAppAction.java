@@ -13,9 +13,11 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
 
 
 public class RentAppAction implements Action {
+   // private final static String APPS = "appsList";
     private final static String APP_ID = "appId";
     private final static String APP = "app";
     private final static String USER = "user";
@@ -28,8 +30,18 @@ public class RentAppAction implements Action {
         Router router = new Router();
         try {
             User user = (User) request.getSession().getAttribute(USER);
+          App app=(App)request.getSession().getAttribute(APP);
+         //   ArrayList<App> apps=new ArrayList<>();
+          //  apps=(ArrayList<App>)request.getSession().getAttribute(APPS);
+
+            System.out.println(user.toString());
+         //   System.out.println(app.toString());
+
             if (user != null && user.getBalance().intValue() > 0){
-                App app = appService.rentApp(Integer.parseInt(request.getParameter(APP_ID)), user.getId());
+                System.out.println("+ "+request.getParameter(APP_ID)+" appID");
+
+             app = appService.rentApp(Integer.parseInt(request.getParameter(APP_ID)), user.getId());
+
                 request.getSession().setAttribute(APP, app);
                 User updateUser = userService.findUserById(user.getId());
                 request.getSession().setAttribute(USER, updateUser);
