@@ -53,12 +53,58 @@
                     </c:if>
                         <%--roleId <7 displaying a list of apps with the possibility to rent them--%>
                         <%--users role: 16 - vip_user; 6 - user; 17 - user_has_order; 12 - blocked user; 7 - administrator --%>
-                    <c:if test="${not empty user and (user.roleId >= 6) and(user.balance>0) and(user.roleId != 12)and(user.roleId != 7)}">
-                        <td align="center" style="vertical-align: middle; border-color: #dae5ff">
+
+                            <c:if test="${not empty user and (user.roleId >= 6) and(user.balance>0) and(user.roleId != 12)and(user.roleId != 7)}">
+
+
+
+                            <td align="center" style="vertical-align: middle; border-color: #dae5ff">
                             <form action="/controller" method="post">
-                                <input type="hidden" name="action" value="rent_app">
-                                <input type="hidden" name="appId" value="${appsList[сounter.count-1].id}">
-                                <button type="submit" class="btn btn-link">${appsList[сounter.count-1].id}</button>
+                                   <input type="hidden" name="action" value="rent_app">
+
+
+
+                           <!--   TODO: why not sending appId  <input type="hidden" name="action" value="rent_app">
+                             -->
+                                <div class="container-fluid">
+                                    <div class="row">
+
+                                        <div class="col-md-1 col-md-offset-1">
+
+                                            <form action="/controller" method="post" class="form-horizontal">
+                                                <input type="hidden" name="action" value="rent_app">
+                                                <div class="text-right">
+                                                    <fmt:message
+                                                            key="table.app.id"/>&nbsp; ${appsList[counter.count-1].id}
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="rentAppForm" class="col-sm-2 control-label"><fmt:message
+                                                            key="nav.app"/></label>
+                                                    <div class="col-sm-3">
+                                                        <input type="number"  id="rentAppForm" name="appId"
+                                                               class="form-control"
+                                                               placeholder="<fmt:message key="nav.app"/>"                                                        >
+                                                           <b id="balance" style="color: red; font-size: 10px"><fmt:message
+                                                                    key="validation.rent"/></b>
+                                                    </div>
+                                                    <div class="col-sm-1">
+                                                        <input type="text" id="appId2" name="appId" value="${appsList[counter.count-1].id}"
+                                                               class="hidden">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="col-sm-offset-1 col-sm-1">
+                                                            <button type="submit" class="btn btn-primary"><fmt:message
+                                                                    key="rent.form.submit"/></button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type="submit"  class="btn btn-link" name="appId" value="${appsList[counter.count-1].id}" >${appsList[сounter.count-1].id}</button>
+
                             </form>
                         </td>
                     </c:if>
