@@ -66,43 +66,7 @@
 
                            <!--   TODO: why not sending appId  <input type="hidden" name="action" value="rent_app">
                              -->
-                                <div class="container-fluid">
-                                    <div class="row">
 
-                                        <div class="col-md-1 col-md-offset-1">
-
-                                            <form action="/controller" method="post" class="form-horizontal">
-                                                <input type="hidden" name="action" value="rent_app">
-                                                <div class="text-right">
-                                                    <fmt:message
-                                                            key="table.app.id"/>&nbsp; ${appsList[counter.count-1].id}
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="rentAppForm" class="col-sm-2 control-label"><fmt:message
-                                                            key="nav.app"/></label>
-                                                    <div class="col-sm-3">
-                                                        <input type="number"  id="rentAppForm" name="appId"
-                                                               class="form-control"
-                                                               placeholder="<fmt:message key="nav.app"/>"                                                        >
-                                                           <b id="balance" style="color: red; font-size: 10px"><fmt:message
-                                                                    key="validation.rent"/></b>
-                                                    </div>
-                                                    <div class="col-sm-1">
-                                                        <input type="text" id="appId2" name="appId" value="${appsList[counter.count-1].id}"
-                                                               class="hidden">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <div class="col-sm-offset-1 col-sm-1">
-                                                            <button type="submit" class="btn btn-primary"><fmt:message
-                                                                    key="rent.form.submit"/></button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </form>
-
-                                        </div>
-                                    </div>
-                                </div>
                                 <button type="submit"  class="btn btn-link" name="appId" value="${appsList[counter.count-1].id}" >${appsList[сounter.count-1].id}</button>
 
                             </form>

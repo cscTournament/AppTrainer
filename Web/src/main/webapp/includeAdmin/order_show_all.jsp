@@ -46,6 +46,9 @@
         <a href="/controller?action=show_admin_page" class="btn btn-default"><fmt:message key="continue"/></a>
     </div>
 </div>
+<br/>
+<br/>
+
 <%@ include file="../include/footer_admin.jsp" %>
 </body>
 </html>

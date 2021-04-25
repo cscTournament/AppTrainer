@@ -23,19 +23,19 @@
         <table class="table table-condensed table-bordered">
             <tr>
                 <td align="center" style="border-color: #dae5ff"><fmt:message key="table.number"/></td>
-                <td align="center" style="border-color: #dae5ff"><fmt:message key="table.rent.type"/></td>
+                <td align="center" style="border-color: #dae5ff"><fmt:message key="table.app.title"/></td>
                 <td align="center" style="border-color: #dae5ff"><fmt:message key="table.rent.price"/></td>
-                <td align="center" style="border-color: #dae5ff"><fmt:message key="table.rent.web_shop"/></td>
                 <td align="center" style="border-color: #dae5ff"><fmt:message key="table.rent.location"/></td>
+                <%-- <td align="center" style="border-color: #dae5ff"><fmt:message key="table.rent.location"/></td>--%>
                 <td align="center" style="border-color: #dae5ff"><fmt:message key="table.rent.photo"/></td>
             </tr>
             <tr>
                 <td align="center" style="vertical-align: middle; border-color: #dae5ff">${app.id}</td>
-                <td align="center" style="vertical-align: middle; border-color: #dae5ff">${app.type}</td>
+                <td align="center" style="vertical-align: middle; border-color: #dae5ff">${app.title}</td>
                 <td align="center" style="vertical-align: middle; border-color: #dae5ff">${app.pricePerHour}</td>
-                <td align="center" style="vertical-align: middle; border-color: #dae5ff">${app.city}</td>
-                <td align="center" style="vertical-align: middle; border-color: #dae5ff">${app.location}</td>
-                <td align="center" style="vertical-align: middle; border-color: #dae5ff"><img src="data:image/jpeg;base64,${bike.picture}"/>
+                <td align="center" style="vertical-align: middle; border-color: #dae5ff"><a href="${app.url}">run the app</a></td>
+                <%-- <td align="center" style="vertical-align: middle; border-color: #dae5ff">${app.location}</td>--%>
+                <td align="center" style="vertical-align: middle; border-color: #dae5ff"><img src="data:image/jpeg;base64,${app.picture}"/>
                 </td>
             </tr>
         </table>
