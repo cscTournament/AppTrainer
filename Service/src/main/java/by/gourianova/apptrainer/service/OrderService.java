@@ -29,11 +29,23 @@ public class OrderService {
         try {
             order = orderDao.findUnclosedOrder(user.getId());
             LocalDateTime startRent = order.getStartRent();
+            System.out.println(order.toString());
             LocalDateTime endRent = LocalDateTime.now();
-            BigDecimal minutes = new BigDecimal(ChronoUnit.MINUTES.between(startRent, endRent));
+            System.out.println(endRent + "endRent");
+            BigDecimal minutes = (new BigDecimal(ChronoUnit.MINUTES.between(startRent, endRent)));
+            System.out.println(minutes+"minutes");
+            int hours=((int)(minutes.intValue())/60);
+            int days= hours/24*60;
+            System.out.println(days+"days "+ hours +"hours");
+            System.out.println(order.getAppId() + "appId");
             app = appDao.findEntityById(order.getAppId());
-            BigDecimal pricePerMinutes = app.getPricePerHour();
-            value = minutes.multiply(pricePerMinutes);
+          //  System.out.println(app.toString()+"app in Orderservice");
+            BigDecimal pricePerDays = app.getPricePerHour();
+            System.out.println(pricePerDays+"pricePerDays");
+             value = BigDecimal.valueOf((int)(hours*pricePerDays.intValue()/24));
+             System.out.println(value + "value");
+             order.setValue(value);
+             System.out.println(order);
         } catch (DaoException e) {
             throw new ServiceException("Transaction failed in calculateOrder method", e);
         }
@@ -47,10 +59,10 @@ public class OrderService {
             order = orderDao.findUnclosedOrder(user.getId());
             LocalDateTime startRent = order.getStartRent();
             LocalDateTime endRent = LocalDateTime.now();
-            BigDecimal minutes = new BigDecimal(ChronoUnit.MINUTES.between(startRent, endRent));
+            BigDecimal days = new BigDecimal(ChronoUnit.DAYS.between(startRent, endRent));
             app = appDao.findEntityById(order.getAppId());
-            BigDecimal pricePerMinutes = app.getPricePerHour();
-            BigDecimal value = minutes.multiply(pricePerMinutes);
+            BigDecimal pricePerDays = app.getPricePerHour();
+            BigDecimal value = days.multiply(pricePerDays);
             orderDao.closeOrder(user, value, app);
         } catch (DaoException e) {
             throw new ServiceException("Transaction failed in closeOrder method", e);

@@ -65,10 +65,22 @@ public class UserService {
         }
     }
 
-    public String validateUser(User user) {
+    public String validateUser(User user) throws ServiceException {
 
-         return ValidateUser.validate(user);
-   }
+        return ValidateUser.validate(user);
+    }
 
 
+
+
+    public boolean deleteEntityById(Integer id) throws ServiceException {
+        boolean isDeleted = false;
+        try {
+            isDeleted = userDao.deleteEntityById(id);
+        } catch (DaoException e) {
+            throw new ServiceException("Transaction failed in deleteUser method", e);
+        }
+
+        return isDeleted;
+    }
 }

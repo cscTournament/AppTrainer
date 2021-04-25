@@ -5,13 +5,13 @@
     <parent>
         <artifactId>AppTrainer</artifactId>
         <groupId>by.gourianova.apptrainer</groupId>
-      <version>1.0</version>
+      <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>Service</artifactId>
     <packaging>jar</packaging>
-
+    <version>1.0</version>
 
     <dependencies>
         <dependency>
