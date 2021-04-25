@@ -30,18 +30,15 @@ public class RentAppAction implements Action {
         Router router = new Router();
         try {
             User user = (User) request.getSession().getAttribute(USER);
-          App app=(App)request.getSession().getAttribute(APP);
-         //   ArrayList<App> apps=new ArrayList<>();
-          //  apps=(ArrayList<App>)request.getSession().getAttribute(APPS);
 
             System.out.println(user.toString());
-         //   System.out.println(app.toString());
+
 
             if (user != null && user.getBalance().intValue() > 0){
                 System.out.println("+ "+request.getParameter(APP_ID)+" appID");
 
-             app = appService.rentApp(Integer.parseInt(request.getParameter(APP_ID)), user.getId());
-
+       App  app = appService.rentApp(Integer.parseInt(request.getParameter(APP_ID)), user.getId());
+//System.out.println(app.toString()+"app in RentAppAction");
                 request.getSession().setAttribute(APP, app);
                 User updateUser = userService.findUserById(user.getId());
                 request.getSession().setAttribute(USER, updateUser);
