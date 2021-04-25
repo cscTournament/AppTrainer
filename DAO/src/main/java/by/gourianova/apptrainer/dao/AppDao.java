@@ -19,13 +19,14 @@ public class AppDao extends AbstractDao<App> {
     private final static String SQL_FIND_ALL_APPS = "SELECT apps.Id ,  apps.Title, types.Price_Per_Hour,   httpaddresses.Web_shop, httpaddresses.Location, types.Image  FROM apps, types, httpaddresses WHERE apps.HttpAddresses_Id = httpaddresses.Id AND apps.Types_Id = types.Id ;";
 
     private final static String SQL_FIND_BY_PAGE = "SELECT apps.Id ,  apps.Title, types.Price_Per_Hour,  types.Image, apps.HttpAddresses_Id FROM apps, types, httpaddresses WHERE apps.HttpAddresses_Id = httpaddresses.Id AND apps.Types_Id = types.Id AND apps.In_Rent = '0' ORDER BY apps.Id LIMIT ? OFFSET ?;";
-    private final static String SQL_FIND_BY_ID = "SELECT apps.Id ,  apps.Title, types.Price_Per_Hour,  types.Image, apps.HttpAddresses_Id FROM apps, types, httpaddresses WHERE apps.Id = ? AND  apps.HttpAddresses_Id = httpaddresses.Id AND apps.Types_Id = types.Id ORDER BY apps.Id;";
-    private final static String SQL_FIND_APP = "SELECT apps.Id ,  apps.Title, types.Price_Per_Hour,  types.Image, apps.HttpAddresses_Id  FROM apps, types, httpaddresses WHERE apps.Id = ? AND apps.HttpAddresses_Id = httpaddresses.Id AND apps.Types_Id = types.Id;";
-    private final static String SQL_RENT_TRUE = "UPDATE apps SET In_Rent = '1' WHERE id = ?;";
+    private final static String SQL_FIND_BY_ID = "SELECT apps.Id ,  apps.Title, types.Price_Per_Hour,   httpaddresses.Web_shop, httpaddresses.Location, types.Image  FROM apps, types, httpaddresses WHERE apps.Id = ? AND  apps.HttpAddresses_Id = httpaddresses.Id AND apps.Types_Id = types.Id ORDER BY apps.Id;";
+    private final static String SQL_FIND_APP =   "SELECT apps.Id ,  apps.Title, types.Price_Per_Hour,  httpaddresses.Web_shop, httpaddresses.Location, types.Image  FROM apps, types, httpaddresses WHERE apps.Id = ? AND apps.HttpAddresses_Id = httpaddresses.Id AND apps.Types_Id = types.Id;";
+   //TODO count++, if more then one site could run - e'mail -> another http address
+   // private final static String SQL_RENT_TRUE = "UPDATE apps SET In_Rent = '1' WHERE id = ?;";
     private final static String SQL_ADD_ORDER = "INSERT INTO orders (Start_Date, Users_Id, Apps_Id) VALUES (now(), ?, ?);";
     private final static String SQL_SET_USER_ROLE_HAS_ORDER = "UPDATE users SET Roles_Id=17 WHERE Id=?;";
     private final static String SQL_CREATE_APP = "INSERT INTO apps (Title, Types_Id, HttpAddresses_Id) VALUES (?, ?, ?);";
-    /*SELECT apps.Id, Type, Price_Per_Hour, Web_shop, Location, Image FROM apps JOIN types ON apps.Types_Id = types.Id JOIN httpaddresses ON apps.HttpAddresses_Id = stations.Id WHERE apps.In_Rent=0 ORDER BY apps.Id;*/
+
     public final static String GOOGLE_PLAY_RELEASE = "/store/apps/details?id=";
     public final static String GOOGLE_CHROM_RELEASE = "/webstore/detail/binocularvision";
 
@@ -56,6 +57,7 @@ public class AppDao extends AbstractDao<App> {
         App app = null;
         ProxyConnection connection = null;
         PreparedStatement preparedStatement = null;
+        System.out.println(id + "id in AppDao" );
         try {
             connection = ConnectionPool.getInstance().getConnection();
             preparedStatement = connection.prepareStatement(SQL_FIND_APP);
@@ -64,6 +66,7 @@ public class AppDao extends AbstractDao<App> {
             while (resultSet.next()) {
                 app = buildApp(resultSet);
             }
+
         } catch (SQLException e) {
             throw new DaoException("Error in findEntityByID method", e);
         } finally {
@@ -130,32 +133,31 @@ public class AppDao extends AbstractDao<App> {
         App app = null;
         ProxyConnection connection = null;
         PreparedStatement preparedStatement = null;
-       
+
         try {
+
             connection = ConnectionPool.getInstance().getConnection();
-            System.out.println("con +");
-            preparedStatement = connection.prepareStatement(SQL_ADD_ORDER);
-        /*    preparedStatement = connection.prepareStatement(SQL_FIND_BY_ID);
+            connection.setAutoCommit(false);
+            preparedStatement = connection.prepareStatement(SQL_FIND_BY_ID);
             preparedStatement.setInt(1, appId);
             ResultSet resultSet = preparedStatement.executeQuery();
-           // connection.setAutoCommit(false);
+
             if (resultSet.next()) {
                 app = buildApp(resultSet);
-                */
-            //app.setInRent(true);
-            //preparedStatement = connection.prepareStatement(SQL_RENT_TRUE);
-            //preparedStatement.setInt(1, app.getId());
-            //preparedStatement.executeUpdate();
+            }
+            /*app.setInRent(true);
+            preparedStatement = connection.prepareStatement(SQL_RENT_TRUE);
+            preparedStatement.setInt(1, app.getId());
+            preparedStatement.executeUpdate();*/
+            preparedStatement = connection.prepareStatement(SQL_ADD_ORDER);
             preparedStatement.setInt(1, userId);
             preparedStatement.setInt(2, appId);
             preparedStatement.executeUpdate();
-            System.out.println("order added +");
             preparedStatement = connection.prepareStatement(SQL_SET_USER_ROLE_HAS_ORDER);
             preparedStatement.setInt(1, userId);
             preparedStatement.executeUpdate();
-            System.out.println("role changed to 17 +");
-            //   connection.commit();
-            //  connection.setAutoCommit(true);
+            connection.commit();
+            connection.setAutoCommit(true);
 
         } catch (SQLException e) {
             try {
@@ -168,7 +170,7 @@ public class AppDao extends AbstractDao<App> {
             close(preparedStatement);
             close(connection);
         }
-        return app;
+          return app;
     }
 
 
@@ -177,15 +179,20 @@ public class AppDao extends AbstractDao<App> {
         app.setId(resultSet.getInt(1));
         app.setTitle(resultSet.getString(2));
         app.setPricePerHour(resultSet.getBigDecimal(3));
-        app.setWeb_shop(resultSet.getString(4));
-        app.setLocation(resultSet.getString(5));
-        app.setUrl(createUrL(resultSet.getString(4), resultSet.getString(5)));
+        String web_shop=resultSet.getString(4);
+        String location=resultSet.getString(5);
+        String url=createUrL(web_shop,location);
+        app.setWeb_shop(web_shop);
+        app.setLocation(location);
+        app.setUrl(url);
+      //  System.out.println(app.toString() + "app in appDao.build before picture");
         Blob photo = resultSet.getBlob(6);
         if (photo != null) {
             byte[] picture = photo.getBytes(1, (int) photo.length());
             String pic = Base64.getEncoder().encodeToString(picture);
             app.setPicture(pic);
         }
+      //  System.out.println(app.toString() + "app in appDao.build");
         return app;
     }
 

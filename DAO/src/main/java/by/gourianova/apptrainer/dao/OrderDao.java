@@ -22,7 +22,7 @@ public class OrderDao extends AbstractDao<Order> {
     private final static String SQL_FIND_UNCLOSED_USER_ORDER = "SELECT * FROM orders WHERE Users_Id=? AND End_Date IS NULL;";
     private final static String SQL_FIND_ALL_USER_ORDERS = "SELECT * FROM orders WHERE Users_Id=?;";
     private final static String SQL_CLOSE_ORDER = "UPDATE orders SET End_Date=now(), Value=? WHERE Users_Id=? AND End_Date IS NULL;";
-    private final static String SQL_UPDATE_USER = "UPDATE users SET Balance=?, Roles_Id=2 WHERE Id=?;";
+    private final static String SQL_UPDATE_USER = "UPDATE users SET Balance=?, Roles_Id=6 WHERE Id=?;";
     private final static String SQL_UPDATE_APP = "UPDATE apps SET In_Rent=0 WHERE Id=?;";
 
     @Override
