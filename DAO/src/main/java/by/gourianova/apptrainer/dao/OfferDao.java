@@ -15,7 +15,6 @@ import java.util.ArrayList;
 
 
 public class OfferDao extends AbstractDao<Offer> {
-
     private final static String SQL_FIND_OFFER = "SELECT * FROM offers WHERE Users_Id=? ORDER BY id DESC LIMIT 1;";
     private final static String SQL_FIND_ALL_OFFERS = "SELECT * FROM offers;";
     private final static String SQL_FIND_UNCLOSED_OFFERS = "SELECT * FROM offers WHERE End_Date IS NULL;";
@@ -72,7 +71,6 @@ public class OfferDao extends AbstractDao<Offer> {
 
     @Override
     public boolean createEntity(Offer entity) throws DaoException {
-
         return false;
     }
 

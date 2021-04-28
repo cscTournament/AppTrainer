@@ -12,17 +12,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Base64;
 
-//import static jdk.nashorn.internal.runtime.regexp.joni.Config.log;
+
 public class AppDao extends AbstractDao<App> {
-
-
     private final static String SQL_FIND_ALL_APPS = "SELECT apps.Id ,  apps.Title, types.Price_Per_Hour,   httpaddresses.Web_shop, httpaddresses.Location, types.Image  FROM apps, types, httpaddresses WHERE apps.HttpAddresses_Id = httpaddresses.Id AND apps.Types_Id = types.Id ;";
-
     private final static String SQL_FIND_BY_PAGE = "SELECT apps.Id ,  apps.Title, types.Price_Per_Hour,  types.Image, apps.HttpAddresses_Id FROM apps, types, httpaddresses WHERE apps.HttpAddresses_Id = httpaddresses.Id AND apps.Types_Id = types.Id AND apps.In_Rent = '0' ORDER BY apps.Id LIMIT ? OFFSET ?;";
     private final static String SQL_FIND_BY_ID = "SELECT apps.Id ,  apps.Title, types.Price_Per_Hour,   httpaddresses.Web_shop, httpaddresses.Location, types.Image  FROM apps, types, httpaddresses WHERE apps.Id = ? AND  apps.HttpAddresses_Id = httpaddresses.Id AND apps.Types_Id = types.Id ORDER BY apps.Id;";
-    private final static String SQL_FIND_APP =   "SELECT apps.Id ,  apps.Title, types.Price_Per_Hour,  httpaddresses.Web_shop, httpaddresses.Location, types.Image  FROM apps, types, httpaddresses WHERE apps.Id = ? AND apps.HttpAddresses_Id = httpaddresses.Id AND apps.Types_Id = types.Id;";
-   //TODO count++, if more then one site could run - e'mail -> another http address
-   // private final static String SQL_RENT_TRUE = "UPDATE apps SET In_Rent = '1' WHERE id = ?;";
+    private final static String SQL_FIND_APP = "SELECT apps.Id ,  apps.Title, types.Price_Per_Hour,  httpaddresses.Web_shop, httpaddresses.Location, types.Image  FROM apps, types, httpaddresses WHERE apps.Id = ? AND apps.HttpAddresses_Id = httpaddresses.Id AND apps.Types_Id = types.Id;";
     private final static String SQL_ADD_ORDER = "INSERT INTO orders (Start_Date, Users_Id, Apps_Id) VALUES (now(), ?, ?);";
     private final static String SQL_SET_USER_ROLE_HAS_ORDER = "UPDATE users SET Roles_Id=17 WHERE Id=?;";
     private final static String SQL_CREATE_APP = "INSERT INTO apps (Title, Types_Id, HttpAddresses_Id) VALUES (?, ?, ?);";
@@ -57,7 +52,7 @@ public class AppDao extends AbstractDao<App> {
         App app = null;
         ProxyConnection connection = null;
         PreparedStatement preparedStatement = null;
-        System.out.println(id + "id in AppDao" );
+        System.out.println(id + "id in AppDao");
         try {
             connection = ConnectionPool.getInstance().getConnection();
             preparedStatement = connection.prepareStatement(SQL_FIND_APP);
@@ -118,7 +113,6 @@ public class AppDao extends AbstractDao<App> {
             while (resultSet.next()) {
                 App app = buildApp(resultSet);
                 appsList.add(app);
-
             }
         } catch (SQLException e) {
             throw new DaoException("Error in findAllByPage method", e);
@@ -145,10 +139,6 @@ public class AppDao extends AbstractDao<App> {
             if (resultSet.next()) {
                 app = buildApp(resultSet);
             }
-            /*app.setInRent(true);
-            preparedStatement = connection.prepareStatement(SQL_RENT_TRUE);
-            preparedStatement.setInt(1, app.getId());
-            preparedStatement.executeUpdate();*/
             preparedStatement = connection.prepareStatement(SQL_ADD_ORDER);
             preparedStatement.setInt(1, userId);
             preparedStatement.setInt(2, appId);
@@ -170,7 +160,7 @@ public class AppDao extends AbstractDao<App> {
             close(preparedStatement);
             close(connection);
         }
-          return app;
+        return app;
     }
 
 
@@ -179,20 +169,18 @@ public class AppDao extends AbstractDao<App> {
         app.setId(resultSet.getInt(1));
         app.setTitle(resultSet.getString(2));
         app.setPricePerHour(resultSet.getBigDecimal(3));
-        String web_shop=resultSet.getString(4);
-        String location=resultSet.getString(5);
-        String url=createUrL(web_shop,location);
+        String web_shop = resultSet.getString(4);
+        String location = resultSet.getString(5);
+        String url = createUrL(web_shop, location);
         app.setWeb_shop(web_shop);
         app.setLocation(location);
         app.setUrl(url);
-      //  System.out.println(app.toString() + "app in appDao.build before picture");
         Blob photo = resultSet.getBlob(6);
         if (photo != null) {
             byte[] picture = photo.getBytes(1, (int) photo.length());
             String pic = Base64.getEncoder().encodeToString(picture);
             app.setPicture(pic);
         }
-      //  System.out.println(app.toString() + "app in appDao.build");
         return app;
     }
 
@@ -201,19 +189,14 @@ public class AppDao extends AbstractDao<App> {
         if (web_shop != null) {
             if (web_shop.contains("play.google.com")) {
                 url = "http://" + "play.google.com" + GOOGLE_PLAY_RELEASE + location;
-
             } else if (web_shop.contains("chrome.google.com")) {
                 url = "http://" + "chrome.google.com" + GOOGLE_CHROM_RELEASE + location;
-
             } else if (web_shop.contains("csc")) {
                 url = "http://" + "csc." + location;
-
             } else {
                 url = "http://csc.buxar-host.ru/csc_tournament_2020/";
             }
         }
-
         return url;
     }
-
 }

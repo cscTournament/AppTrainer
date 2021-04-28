@@ -2,8 +2,8 @@ package by.gourianova.apptrainer.dao;
 
 import by.gourianova.apptrainer.db.ConnectionPool;
 import by.gourianova.apptrainer.db.ProxyConnection;
-import by.gourianova.apptrainer.exception.DaoException;
 import by.gourianova.apptrainer.entity.Entity;
+import by.gourianova.apptrainer.exception.DaoException;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

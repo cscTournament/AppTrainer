@@ -2,16 +2,16 @@ package by.gourianova.apptrainer.dao;
 
 import by.gourianova.apptrainer.db.ConnectionPool;
 import by.gourianova.apptrainer.db.ProxyConnection;
-import by.gourianova.apptrainer.exception.DaoException;
 import by.gourianova.apptrainer.entity.AppType;
+import by.gourianova.apptrainer.exception.DaoException;
 
 import java.io.InputStream;
-import java.sql.*;
+import java.sql.Blob;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Base64;
-
-//import static jdk.nashorn.internal.runtime.regexp.joni.Config.log;
-import static org.apache.logging.log4j.core.util.Closer.close;
 
 
 public class AppTypeDao extends AbstractDao<AppType> {
@@ -42,9 +42,10 @@ public class AppTypeDao extends AbstractDao<AppType> {
                 if (photo != null) {
                     byte[] image = photo.getBytes(1, (int) photo.length());
                     String pic = Base64.getEncoder().encodeToString(image);
-                    appType.setImage(pic);}
-                    typesList.add(appType);
+                    appType.setImage(pic);
                 }
+                typesList.add(appType);
+            }
         } catch (SQLException e) {
             throw new DaoException("Error in findAll method", e);
         } finally {
@@ -119,30 +120,26 @@ public class AppTypeDao extends AbstractDao<AppType> {
 
     @Override
     public boolean createEntity(AppType entity) throws DaoException {
-
         return false;
-
     }
 
     @Override
     public boolean deleteEntityById(Integer id) throws DaoException {
-            ProxyConnection connection = null;
-            boolean isDeleted = false;
-            PreparedStatement preparedStatement = null;
-           try {connection = ConnectionPool.getInstance().getConnection();
-                preparedStatement = connection.prepareStatement(SQL_DELETE_TYPE_BY_ID);
-                preparedStatement.setInt(1, id);
-                preparedStatement.executeUpdate();
-                isDeleted = true;
-              } catch (SQLException e) {
-                throw new DaoException("Error in deleteEntity method", e);
-            } finally {
-               close(preparedStatement);
-               close(connection);
-
-
-            }
-            return isDeleted;
-
+        ProxyConnection connection = null;
+        boolean isDeleted = false;
+        PreparedStatement preparedStatement = null;
+        try {
+            connection = ConnectionPool.getInstance().getConnection();
+            preparedStatement = connection.prepareStatement(SQL_DELETE_TYPE_BY_ID);
+            preparedStatement.setInt(1, id);
+            preparedStatement.executeUpdate();
+            isDeleted = true;
+        } catch (SQLException e) {
+            throw new DaoException("Error in deleteEntity method", e);
+        } finally {
+            close(preparedStatement);
+            close(connection);
+        }
+        return isDeleted;
     }
 }

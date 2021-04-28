@@ -59,14 +59,14 @@ public class ConnectionPool {
 
     public static ConnectionPool getInstance() {
         if (!CREATE_INSTANCE.get()) {
-           // lock.lock();
+           lock.lock();
             try {
                 if (instance == null) {
                     instance = new ConnectionPool();
                     CREATE_INSTANCE.set(true);
                 }
             } finally {
-             //   lock.unlock();
+                lock.unlock();
             }
         }
         return instance;

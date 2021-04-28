@@ -89,22 +89,18 @@ public class RoleDao extends AbstractDao<Role> {
         boolean isDeleted = false;
         ProxyConnection connection = null;
         PreparedStatement preparedStatement = null;
-
-
         try {
             connection = ConnectionPool.getInstance().getConnection();
             preparedStatement = connection.prepareStatement(SQL_DELETE_ROLE_BY_ID);
             preparedStatement.setInt(1, id);
             preparedStatement.executeUpdate();
             isDeleted = true;
-
         } catch (SQLException e) {
             throw new DaoException("Error in deleteEntity method", e);
         } finally {
             close(preparedStatement);
             close(connection);
         }
-
         return isDeleted;
     }
 }

@@ -14,11 +14,11 @@ import java.util.Collection;
 
 import org.junit.runners.Parameterized.Parameters;
 
-//import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertEquals;
 
-//@RunWith(value= Parameterized.class)
+@RunWith(value= Parameterized.class)
 public class AppDaoTest {
-  /*  private int app_Id;
+ private int app_Id;
     private String expectedTitle;
 
  @Parameters
@@ -31,15 +31,11 @@ public class AppDaoTest {
                 {77,"TextBook"},
                 {78, "BinocularvisionArcada"},
                 {79,"BinocularvisionArcada"}
-
-
-
         });
     }
     public  AppDaoTest(int apps_Id, String expectedTitles){
      this.app_Id=apps_Id;
      this.expectedTitle=expectedTitles;
-
     }
     @Test
     public void findAppByIdTest001(){
@@ -50,12 +46,10 @@ public class AppDaoTest {
           App  app=appDao.findEntityById(app_Id);
             actualTitle=app.getTitle();
             Assert.assertEquals(expectedTitle, actualTitle);
-                    //assertEquals("FindTheWay",app.getTitle());
         } catch (DaoException e) {
             e.printStackTrace();
         }
 
     }
 
-   */
 }

@@ -38,15 +38,13 @@ public class UserDao extends AbstractDao<User> {
             statement = connection.createStatement();
             statement.executeUpdate(SQL_CREATE_TABLE_USERS);
         } catch (SQLException e) {
-
             try {
                 throw new DaoException("Error in setSqlCreateTableUsers method", e);
             } catch (DaoException daoException) {
-                //log.
+
                 System.out.println(" couldn't throw DaoException in UserDao.setSqlCreateTableUser");
                 daoException.printStackTrace();
             }
-
         } finally {
             close(statement);
             close(connection);
@@ -274,10 +272,6 @@ return null;    }
         user.setLastName(resultSet.getString(5));
         user.setBalance(resultSet.getBigDecimal(6));
         user.setRoleId(resultSet.getInt(7));
-        //TODO: FIX
-        //                date = resultSet.getDate("Create_time").toLocalDate();
-        //               if (date == null) date = LocalDate.now();
-        //user.setCreate_time(resultSet.getDate(8));
         return user;
     }
 
