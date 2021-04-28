@@ -7,11 +7,9 @@ import by.gourianova.apptrainer.exception.ServiceException;
 import by.gourianova.apptrainer.service.AppService;
 import by.gourianova.apptrainer.util.PageConstant;
 
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -25,7 +23,6 @@ public class ShowAllAppsAction implements Action {
     public Router execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Router router = new Router();
         ArrayList<App> appsList;
-
         try {
             appsList = appService.findAll();
             request.setAttribute(APPS_LIST, appsList);
@@ -37,6 +34,5 @@ public class ShowAllAppsAction implements Action {
         }
         return router;
     }
-
 }
 

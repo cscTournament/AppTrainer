@@ -27,7 +27,6 @@ public class AddHttpAddressAction implements Action {
             httpAddress.setLocation(request.getParameter(HTTPADDRESS_LOCATION));
             httpAddressService.createHttpAddress(httpAddress);
             router.setPagePath(ADMIN_PAGE);
-       //     router.setPagePath(PageConstant.FIRST_PAGE);
             router.setRoute(Router.RouteType.REDIRECT);
         } catch (ServiceException e) {
             request.getSession().setAttribute(MESSAGE, e.getMessage());

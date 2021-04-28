@@ -15,7 +15,7 @@ import java.io.IOException;
 
 
 @WebServlet(name = "controller", urlPatterns = "/controller")
-@MultipartConfig(maxFileSize=5*1024*1024)
+@MultipartConfig(maxFileSize = 1024 * 1024 * 5)
 public class Controller extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

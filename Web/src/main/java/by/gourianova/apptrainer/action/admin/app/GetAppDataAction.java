@@ -29,7 +29,6 @@ public class GetAppDataAction implements Action {
         Router router = new Router();
         ArrayList<AppType> typesList;
         ArrayList<HttpAddress> httpAddressesList;
-
         try {
             typesList = appTypeService.findAll();
             httpAddressesList = httpAddressService.findAll();

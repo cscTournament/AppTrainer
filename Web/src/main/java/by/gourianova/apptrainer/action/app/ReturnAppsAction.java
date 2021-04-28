@@ -1,14 +1,13 @@
 package by.gourianova.apptrainer.action.app;
 
-import by.gourianova.apptrainer.controller.Router;
 import by.gourianova.apptrainer.action.Action;
+import by.gourianova.apptrainer.controller.Router;
 import by.gourianova.apptrainer.entity.Order;
 import by.gourianova.apptrainer.entity.User;
 import by.gourianova.apptrainer.exception.ServiceException;
 import by.gourianova.apptrainer.service.OrderService;
 import by.gourianova.apptrainer.service.UserService;
 import by.gourianova.apptrainer.util.PageConstant;
-
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;

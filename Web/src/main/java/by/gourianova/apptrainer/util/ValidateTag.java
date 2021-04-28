@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.util.ResourceBundle;
 
 
-
 public class ValidateTag extends TagSupport {
     private String input;
     private final static String WRONG_FIRST_NAME = "firstName";
@@ -22,25 +21,25 @@ public class ValidateTag extends TagSupport {
     @Override
     public int doStartTag() throws JspException {
         ResourceBundle bundle = ResourceBundle.getBundle((String) pageContext.getSession().getAttribute("locale"));
-            try {
-                if (input.equals(WRONG_FIRST_NAME)) {
-                    pageContext.getOut().write(bundle.getString("alert.wrong.first.name"));
-                }
-                if (input.equals(WRONG_LAST_NAME)) {
-                    pageContext.getOut().write(bundle.getString("alert.wrong.last.name"));
-                }
-                if (input.equals(WRONG_LOGIN)) {
-                    pageContext.getOut().write(bundle.getString("alert.wrong.login"));
-                }
-                if (input.equals(WRONG_PASSWORD)) {
-                    pageContext.getOut().write(bundle.getString("alert.wrong.password"));
-                }
-                if (input.equals(WRONG_BALANCE)) {
-                    pageContext.getOut().write(bundle.getString("alert.wrong.balance"));
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
+        try {
+            if (input.equals(WRONG_FIRST_NAME)) {
+                pageContext.getOut().write(bundle.getString("alert.wrong.first.name"));
             }
+            if (input.equals(WRONG_LAST_NAME)) {
+                pageContext.getOut().write(bundle.getString("alert.wrong.last.name"));
+            }
+            if (input.equals(WRONG_LOGIN)) {
+                pageContext.getOut().write(bundle.getString("alert.wrong.login"));
+            }
+            if (input.equals(WRONG_PASSWORD)) {
+                pageContext.getOut().write(bundle.getString("alert.wrong.password"));
+            }
+            if (input.equals(WRONG_BALANCE)) {
+                pageContext.getOut().write(bundle.getString("alert.wrong.balance"));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return super.doStartTag();
     }
 }

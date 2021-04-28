@@ -1,6 +1,4 @@
 package by.gourianova.apptrainer.action.locale;
-
-
 public enum LocaleType {
     DEFAULT("locale_en_US"),
     RU("locale_ru_RU");

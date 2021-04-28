@@ -14,7 +14,7 @@ import java.io.IOException;
 public class DeleteRoleAction implements Action {
     private final static String ROLE_ID = "roleId";
     private final static String MESSAGE = "message";
-    private final static String ADMIN_PAGE="/controller?action=show_admin_page";
+    private final static String ADMIN_PAGE = "/controller?action=show_admin_page";
     private RoleService roleService = new RoleService();
 
     @Override

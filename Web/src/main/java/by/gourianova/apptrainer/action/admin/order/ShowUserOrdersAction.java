@@ -1,7 +1,7 @@
 package by.gourianova.apptrainer.action.admin.order;
 
-import by.gourianova.apptrainer.controller.Router;
 import by.gourianova.apptrainer.action.Action;
+import by.gourianova.apptrainer.controller.Router;
 import by.gourianova.apptrainer.entity.Order;
 import by.gourianova.apptrainer.exception.ServiceException;
 import by.gourianova.apptrainer.service.OrderService;
@@ -25,7 +25,6 @@ public class ShowUserOrdersAction implements Action {
     public Router execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Router router = new Router();
         try {
-            /*int userId = (int) request.getAttribute(USER_ID);*/
             ArrayList<Order> ordersList = orderService.findAllUserOrders(Integer.parseInt(request.getParameter(USER_ID)));
             if (!ordersList.isEmpty()) {
                 request.setAttribute(ORDERS_LIST, ordersList);
