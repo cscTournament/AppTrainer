@@ -7,8 +7,7 @@
 <html>
 <head>
     <script type="text/javascript" src="../js/validator.js"></script>
-    <!-- TODO: change title after fixing: title.show.user.page-->
-    <title><fmt:message key="title.add.money.page"/></title>
+        <title><fmt:message key="title.add.money.page"/></title>
         <link href="../css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
@@ -57,7 +56,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
-            <%-- TODO: uncomment after writing update password and rple
+            <%-- TODO: uncomment after writing update password
              <form action="/controller" method="post" class="form-horizontal">
                    <input type="hidden" name="action" value="change_user_data">
                    <div class="hidden">

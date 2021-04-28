@@ -57,15 +57,9 @@
                             <c:if test="${not empty user and (user.roleId >= 6) and(user.balance>0) and(user.roleId != 12)and(user.roleId != 7)}">
 
 
-
                             <td align="center" style="vertical-align: middle; border-color: #dae5ff">
                             <form action="/controller" method="post">
                                    <input type="hidden" name="action" value="rent_app">
-
-
-
-                           <!--   TODO: why not sending appId  <input type="hidden" name="action" value="rent_app">
-                             -->
 
                                 <button type="submit"  class="btn btn-link" name="appId" value="${appsList[counter.count-1].id}" >${appsList[сounter.count-1].id}</button>
 

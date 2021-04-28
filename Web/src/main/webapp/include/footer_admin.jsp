@@ -6,8 +6,7 @@
     <div class="container-fluid">
         <form class="navbar-form navbar-right" action="/controller">
 
-            <%--  TODO: FIX?      <input type="hidden" name="action" value="show_apps_page">--%>
-            <input type="hidden" name="action" value="show_admin_page">
+                 <input type="hidden" name="action" value="show_admin_page">
   <button type="submit" class="btn btn-default"><fmt:message key="footer.admin"/></button>
 
 </form>

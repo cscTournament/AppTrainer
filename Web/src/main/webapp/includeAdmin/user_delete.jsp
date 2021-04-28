@@ -25,7 +25,7 @@
 
     <font color="red">
 
-        <p><c:out value="${message}" /></p>
+        <p><c:out value="${message}"/></p>
 
         <%
                 out.write(message);
@@ -40,10 +40,10 @@
         <div class="col-md-6 col-md-offset-2">
             <form action="/controller" method="post" class="form-horizontal">
 
-                <%-- TODO: Pattern om role range--%>
                 <input type="hidden" name="action" value="delete_user">
                 <div class="form-group">
-                    <label for="user" class="col-sm-3 control-label"><fmt:message key="update.user.form.delete"/></label>
+                    <label for="user" class="col-sm-3 control-label"><fmt:message
+                            key="update.user.form.delete"/></label>
 
                     <div class="col-sm-8">
                         <input type="text" id="user" name="userId" class="form-control"

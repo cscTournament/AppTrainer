@@ -7,8 +7,7 @@
 </head>
 <body>
 
-<%-- TODO: FIX
-<c:redirect url="controller?action=show_apps_page"/>--%>
+
  <c:redirect url="controller?action=show_all_user_apps"/>
 </body>
 </html>
