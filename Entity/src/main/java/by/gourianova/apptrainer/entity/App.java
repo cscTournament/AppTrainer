@@ -10,31 +10,18 @@ public class App extends Entity {
     private boolean inRent;
     private int typeId;
     private int HttpAddressesId;
-  //  private String type;
     private BigDecimal pricePerHour;
-    //todo: change web_shop&location = http:// + web_shop + webinfo + loction
-    //TODO: description
     private String web_shop;
     private String location;
     private String picture;
     private String url;
-    public String getUrl() {
-        return url;
-    }
-
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
-
 
     public App() {
     }
 
-    public App(int id,String title, boolean inRent, int typeId, int HttpAddressesId,  BigDecimal pricePerHour, String web_shop, String location, String picture) {
+    public App(int id, String title, boolean inRent, int typeId, int HttpAddressesId, BigDecimal pricePerHour, String web_shop, String location, String picture) {
         this.id = id;
-        this.title=title;
+        this.title = title;
         this.inRent = inRent;
         this.typeId = typeId;
         this.HttpAddressesId = HttpAddressesId;
@@ -51,6 +38,7 @@ public class App extends Entity {
     public void setId(int id) {
         this.id = id;
     }
+
     public String getTitle() {
         return title;
     }
@@ -83,14 +71,14 @@ public class App extends Entity {
         this.HttpAddressesId = HttpAddressesId;
     }
 
-   /* public String getType() {
-        return type;
+    public String getUrl() {
+        return url;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setUrl(String url) {
+        this.url = url;
     }
-*/
+
     public BigDecimal getPricePerHour() {
         return pricePerHour;
     }
@@ -132,7 +120,7 @@ public class App extends Entity {
                 isInRent() == app.isInRent() &&
                 getTypeId() == app.getTypeId() &&
                 getHttpAddressesId() == app.getHttpAddressesId() &&
-           //     Objects.equals(getType(), app.getType()) &&
+                //     Objects.equals(getType(), app.getType()) &&
                 Objects.equals(getPricePerHour(), app.getPricePerHour()) &&
                 Objects.equals(getWeb_shop(), app.getWeb_shop()) &&
                 Objects.equals(getLocation(), app.getLocation()) &&
@@ -152,7 +140,7 @@ public class App extends Entity {
                 ", inRent=" + inRent +
                 ", typeId=" + typeId +
                 ", HttpAddressesId=" + HttpAddressesId +
-                              ", pricePerHour=" + pricePerHour +
+                ", pricePerHour=" + pricePerHour +
                 ",web_shop='" + web_shop + '\'' +
                 ", location='" + location + '\'' +
                 ", picture='" + picture + '\'' +
